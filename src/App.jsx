@@ -1,24 +1,26 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import './App.css'
 
 /*
   WEBSITE STRUCTURE - Depth Levels (0-4):
   Level 0: Home (/)
-  Level 1: Services, Products, Blog, About
-  Level 2-4: Sub pages...
+  Level 1: /services, /products, /blog, /about
+  Level 2: /services/webdev, /services/mobile, /services/seo, /products/a, /products/b, /blog/post-1, /blog/post-2
+  Level 3: /services/webdev/frontend, /services/webdev/backend, /services/webdev/fullstack
+  Level 4: /services/webdev/frontend/react, /services/webdev/frontend/vue, /services/webdev/frontend/angular
 */
 
 // ==================== LEVEL 4 PAGES ====================
-function ReactDetailPage({ onNavigate }) {
-  // Fix: Removed unnecessary re-render and memory leak (no more setInterval)
+function ReactDetailPage() {
   return (
     <main>
       <section className="page-hero depth-4">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
-          <a onClick={() => onNavigate('frontend')}> Frontend</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
+          <Link to="/services/webdev/frontend"> Frontend</Link> &gt;
           <span> React</span>
         </div>
         <span className="depth-badge">Depth: 4</span>
@@ -28,7 +30,6 @@ function ReactDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>React.js Development Services</h3>
-          {/* Fix: Added width/height for CLS */}
           <img src="https://picsum.photos/600/300" alt="React" width="600" height="300" />
           <p>Chúng tôi cung cấp dịch vụ phát triển React chuyên nghiệp.</p>
           <p><a href="https://react.dev" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về React</a></p>
@@ -38,15 +39,15 @@ function ReactDetailPage({ onNavigate }) {
   );
 }
 
-function VueDetailPage({ onNavigate }) {
+function VueDetailPage() {
   return (
     <main>
       <section className="page-hero depth-4">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
-          <a onClick={() => onNavigate('frontend')}> Frontend</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
+          <Link to="/services/webdev/frontend"> Frontend</Link> &gt;
           <span> Vue</span>
         </div>
         <span className="depth-badge">Depth: 4</span>
@@ -55,7 +56,6 @@ function VueDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Vue.js Development Services</h3>
-          {/* Fix: Added width/height for CLS */}
           <img src="https://picsum.photos/600/301" alt="Vue" width="600" height="301" />
           <p><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Vue</a></p>
         </article>
@@ -64,15 +64,15 @@ function VueDetailPage({ onNavigate }) {
   );
 }
 
-function AngularDetailPage({ onNavigate }) {
+function AngularDetailPage() {
   return (
     <main>
       <section className="page-hero depth-4">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
-          <a onClick={() => onNavigate('frontend')}> Frontend</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
+          <Link to="/services/webdev/frontend"> Frontend</Link> &gt;
           <span> Angular</span>
         </div>
         <span className="depth-badge">Depth: 4</span>
@@ -81,7 +81,6 @@ function AngularDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Angular Development Services</h3>
-          {/* Fix: Added width/height for CLS */}
           <img src="https://picsum.photos/600/302" alt="Angular" width="600" height="302" />
           <p><a href="https://angular.io" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Angular</a></p>
         </article>
@@ -91,48 +90,48 @@ function AngularDetailPage({ onNavigate }) {
 }
 
 // ==================== LEVEL 3 PAGES ====================
-function FrontendPage({ onNavigate }) {
+function FrontendPage() {
   return (
     <main>
       <section className="page-hero depth-3">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
           <span> Frontend</span>
         </div>
         <span className="depth-badge">Depth: 3</span>
         <h2>Frontend Development</h2>
       </section>
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('react-detail')}>
+        <Link to="/services/webdev/frontend/react" className="feature-card">
           <h4>React</h4>
           <p>Thư viện UI phổ biến nhất</p>
           <span className="nav-arrow">→</span>
-        </div>
-        <div className="feature-card" onClick={() => onNavigate('vue-detail')}>
+        </Link>
+        <Link to="/services/webdev/frontend/vue" className="feature-card">
           <h4>Vue.js</h4>
           <p>Framework progressive</p>
           <span className="nav-arrow">→</span>
-        </div>
-        <div className="feature-card" onClick={() => onNavigate('angular-detail')}>
+        </Link>
+        <Link to="/services/webdev/frontend/angular" className="feature-card">
           <h4>Angular</h4>
           <p>Platform của Google</p>
           <span className="nav-arrow">→</span>
-        </div>
+        </Link>
       </section>
     </main>
   );
 }
 
-function BackendPage({ onNavigate }) {
+function BackendPage() {
   return (
     <main>
       <section className="page-hero depth-3">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
           <span> Backend</span>
         </div>
         <span className="depth-badge">Depth: 3</span>
@@ -147,14 +146,14 @@ function BackendPage({ onNavigate }) {
   );
 }
 
-function FullstackPage({ onNavigate }) {
+function FullstackPage() {
   return (
     <main>
       <section className="page-hero depth-3">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
-          <a onClick={() => onNavigate('webdev')}> Web Dev</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
+          <Link to="/services/webdev"> Web Dev</Link> &gt;
           <span> Fullstack</span>
         </div>
         <span className="depth-badge">Depth: 3</span>
@@ -168,34 +167,34 @@ function FullstackPage({ onNavigate }) {
 }
 
 // ==================== LEVEL 2 PAGES ====================
-function WebDevPage({ onNavigate }) {
+function WebDevPage() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
           <span> Web Development</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
         <h2>Web Development</h2>
       </section>
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('frontend')}><h4>Frontend</h4><p>React, Vue, Angular</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('backend')}><h4>Backend</h4><p>Node.js, .NET, Python</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('fullstack')}><h4>Fullstack</h4><p>Giải pháp toàn diện</p><span className="nav-arrow">→</span></div>
+        <Link to="/services/webdev/frontend" className="feature-card"><h4>Frontend</h4><p>React, Vue, Angular</p><span className="nav-arrow">→</span></Link>
+        <Link to="/services/webdev/backend" className="feature-card"><h4>Backend</h4><p>Node.js, .NET, Python</p><span className="nav-arrow">→</span></Link>
+        <Link to="/services/webdev/fullstack" className="feature-card"><h4>Fullstack</h4><p>Giải pháp toàn diện</p><span className="nav-arrow">→</span></Link>
       </section>
     </main>
   );
 }
 
-function MobileDevPage({ onNavigate }) {
+function MobileDevPage() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
           <span> Mobile Development</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -210,13 +209,13 @@ function MobileDevPage({ onNavigate }) {
   );
 }
 
-function SEOPage({ onNavigate }) {
+function SEOPage() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('services')}> Dịch vụ</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/services"> Dịch vụ</Link> &gt;
           <span> SEO</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -229,13 +228,13 @@ function SEOPage({ onNavigate }) {
   );
 }
 
-function ProductAPage({ onNavigate }) {
+function ProductAPage() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('products')}> Sản phẩm</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/products"> Sản phẩm</Link> &gt;
           <span> Product A</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -246,13 +245,13 @@ function ProductAPage({ onNavigate }) {
   );
 }
 
-function ProductBPage({ onNavigate }) {
+function ProductBPage() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('products')}> Sản phẩm</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/products"> Sản phẩm</Link> &gt;
           <span> Product B</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -263,13 +262,13 @@ function ProductBPage({ onNavigate }) {
   );
 }
 
-function BlogPost1Page({ onNavigate }) {
+function BlogPost1Page() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('blog')}> Blog</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/blog"> Blog</Link> &gt;
           <span> Bài viết 1</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -278,7 +277,6 @@ function BlogPost1Page({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Các xu hướng web năm 2024</h3>
-          {/* Fix: Added width/height for CLS */}
           <img src="https://picsum.photos/800/400" alt="Blog image" width="800" height="400" />
           <p>Năm 2024 đánh dấu nhiều thay đổi lớn...</p>
           <p><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></p>
@@ -288,13 +286,13 @@ function BlogPost1Page({ onNavigate }) {
   );
 }
 
-function BlogPost2Page({ onNavigate }) {
+function BlogPost2Page() {
   return (
     <main>
       <section className="page-hero depth-2">
         <div className="breadcrumb">
-          <a onClick={() => onNavigate('home')}>Trang chủ</a> &gt;
-          <a onClick={() => onNavigate('blog')}> Blog</a> &gt;
+          <Link to="/">Trang chủ</Link> &gt;
+          <Link to="/blog"> Blog</Link> &gt;
           <span> Bài viết 2</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
@@ -308,62 +306,62 @@ function BlogPost2Page({ onNavigate }) {
 }
 
 // ==================== LEVEL 1 PAGES ====================
-function ServicesPage({ onNavigate }) {
+function ServicesPage() {
   return (
     <main>
       <section className="page-hero depth-1">
-        <div className="breadcrumb"><a onClick={() => onNavigate('home')}>Trang chủ</a> &gt; <span> Dịch vụ</span></div>
+        <div className="breadcrumb"><Link to="/">Trang chủ</Link> &gt; <span> Dịch vụ</span></div>
         <span className="depth-badge">Depth: 1</span>
         <h2>Dịch Vụ</h2>
       </section>
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('webdev')}><h4>Web Development</h4><p>Phát triển website</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('mobile')}><h4>Mobile Development</h4><p>Ứng dụng di động</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('seo')}><h4>SEO</h4><p>Tối ưu tìm kiếm</p><span className="nav-arrow">→</span></div>
+        <Link to="/services/webdev" className="feature-card"><h4>Web Development</h4><p>Phát triển website</p><span className="nav-arrow">→</span></Link>
+        <Link to="/services/mobile" className="feature-card"><h4>Mobile Development</h4><p>Ứng dụng di động</p><span className="nav-arrow">→</span></Link>
+        <Link to="/services/seo" className="feature-card"><h4>SEO</h4><p>Tối ưu tìm kiếm</p><span className="nav-arrow">→</span></Link>
       </section>
     </main>
   );
 }
 
-function ProductsPage({ onNavigate }) {
+function ProductsPage() {
   return (
     <main>
       <section className="page-hero depth-1">
-        <div className="breadcrumb"><a onClick={() => onNavigate('home')}>Trang chủ</a> &gt; <span> Sản phẩm</span></div>
+        <div className="breadcrumb"><Link to="/">Trang chủ</Link> &gt; <span> Sản phẩm</span></div>
         <span className="depth-badge">Depth: 1</span>
         <h2>Sản Phẩm</h2>
       </section>
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('product-a')}><h4>Product A</h4><p>Sản phẩm hàng đầu</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('product-b')}><h4>Product B</h4><p>Giải pháp doanh nghiệp</p><span className="nav-arrow">→</span></div>
+        <Link to="/products/a" className="feature-card"><h4>Product A</h4><p>Sản phẩm hàng đầu</p><span className="nav-arrow">→</span></Link>
+        <Link to="/products/b" className="feature-card"><h4>Product B</h4><p>Giải pháp doanh nghiệp</p><span className="nav-arrow">→</span></Link>
         <div className="feature-card"><h4>Product C</h4><p>Sản phẩm mới</p></div>
       </section>
     </main>
   );
 }
 
-function BlogPage({ onNavigate }) {
+function BlogPage() {
   return (
     <main>
       <section className="page-hero depth-1">
-        <div className="breadcrumb"><a onClick={() => onNavigate('home')}>Trang chủ</a> &gt; <span> Blog</span></div>
+        <div className="breadcrumb"><Link to="/">Trang chủ</Link> &gt; <span> Blog</span></div>
         <span className="depth-badge">Depth: 1</span>
         <h2>Blog</h2>
       </section>
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('blog-post-1')}><h4>Xu hướng Web 2024</h4><p>Tháng 12, 2024</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('blog-post-2')}><h4>Performance Web</h4><p>Tháng 11, 2024</p><span className="nav-arrow">→</span></div>
+        <Link to="/blog/post-1" className="feature-card"><h4>Xu hướng Web 2024</h4><p>Tháng 12, 2024</p><span className="nav-arrow">→</span></Link>
+        <Link to="/blog/post-2" className="feature-card"><h4>Performance Web</h4><p>Tháng 11, 2024</p><span className="nav-arrow">→</span></Link>
         <div className="feature-card"><h4>AI trong Web</h4><p>Tháng 10, 2024</p></div>
       </section>
     </main>
   );
 }
 
-function AboutPage({ onNavigate }) {
+function AboutPage() {
   return (
     <main>
       <section className="page-hero depth-1">
-        <div className="breadcrumb"><a onClick={() => onNavigate('home')}>Trang chủ</a> &gt; <span> Giới thiệu</span></div>
+        <div className="breadcrumb"><Link to="/">Trang chủ</Link> &gt; <span> Giới thiệu</span></div>
         <span className="depth-badge">Depth: 1</span>
         <h2>Về Chúng Tôi</h2>
       </section>
@@ -375,22 +373,20 @@ function AboutPage({ onNavigate }) {
 }
 
 // ==================== LEVEL 0 PAGE (HOME) ====================
-function HomePage({ onNavigate }) {
-  // Fix: Removed unnecessary effect and fetch
+function HomePage() {
   return (
     <main>
       <section className="hero depth-0">
         <span className="depth-badge">Depth: 0</span>
         <h2>Chào mừng đến với trang Demo React</h2>
-        <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test PageSpeed</p>
-        {/* Fix: Added width/height for CLS */}
+        <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test Crawler</p>
         <img src="https://picsum.photos/1200/600" alt="Hero image" width="1200" height="600" />
       </section>
 
       <section className="features">
-        <div className="feature-card" onClick={() => onNavigate('services')}><h4>Dịch vụ</h4><p>Xem các dịch vụ</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('products')}><h4>Sản phẩm</h4><p>Khám phá sản phẩm</p><span className="nav-arrow">→</span></div>
-        <div className="feature-card" onClick={() => onNavigate('blog')}><h4>Blog</h4><p>Đọc bài viết mới</p><span className="nav-arrow">→</span></div>
+        <Link to="/services" className="feature-card"><h4>Dịch vụ</h4><p>Xem các dịch vụ</p><span className="nav-arrow">→</span></Link>
+        <Link to="/products" className="feature-card"><h4>Sản phẩm</h4><p>Khám phá sản phẩm</p><span className="nav-arrow">→</span></Link>
+        <Link to="/blog" className="feature-card"><h4>Blog</h4><p>Đọc bài viết mới</p><span className="nav-arrow">→</span></Link>
       </section>
 
       <section className="content">
@@ -404,62 +400,75 @@ function HomePage({ onNavigate }) {
   );
 }
 
-// ==================== MAIN APP ====================
-function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+// ==================== NAVIGATION COMPONENT ====================
+function Navigation() {
+  const location = useLocation();
+  const path = location.pathname;
 
-  // Fix: Removed console log on every render
-  const navigate = (page) => {
-    setCurrentPage(page);
-    window.scrollTo(0, 0);
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home': return <HomePage onNavigate={navigate} />;
-      case 'services': return <ServicesPage onNavigate={navigate} />;
-      case 'products': return <ProductsPage onNavigate={navigate} />;
-      case 'blog': return <BlogPage onNavigate={navigate} />;
-      case 'about': return <AboutPage onNavigate={navigate} />;
-      case 'webdev': return <WebDevPage onNavigate={navigate} />;
-      case 'mobile': return <MobileDevPage onNavigate={navigate} />;
-      case 'seo': return <SEOPage onNavigate={navigate} />;
-      case 'product-a': return <ProductAPage onNavigate={navigate} />;
-      case 'product-b': return <ProductBPage onNavigate={navigate} />;
-      case 'blog-post-1': return <BlogPost1Page onNavigate={navigate} />;
-      case 'blog-post-2': return <BlogPost2Page onNavigate={navigate} />;
-      case 'frontend': return <FrontendPage onNavigate={navigate} />;
-      case 'backend': return <BackendPage onNavigate={navigate} />;
-      case 'fullstack': return <FullstackPage onNavigate={navigate} />;
-      case 'react-detail': return <ReactDetailPage onNavigate={navigate} />;
-      case 'vue-detail': return <VueDetailPage onNavigate={navigate} />;
-      case 'angular-detail': return <AngularDetailPage onNavigate={navigate} />;
-      default: return <HomePage onNavigate={navigate} />;
-    }
+  const isActive = (check) => {
+    if (check === '/') return path === '/';
+    return path.startsWith(check);
   };
 
   return (
-    <>
-      <header>
-        <nav>
-          <h1 onClick={() => navigate('home')} style={{ cursor: 'pointer' }}>Demo Website</h1>
-          <ul>
-            <li><a className={currentPage === 'home' ? 'active' : ''} onClick={() => navigate('home')}>Trang chủ</a></li>
-            <li><a className={currentPage.includes('service') || currentPage.includes('webdev') || currentPage.includes('mobile') || currentPage.includes('seo') || currentPage.includes('frontend') || currentPage.includes('backend') || currentPage.includes('fullstack') || currentPage.includes('react') || currentPage.includes('vue') || currentPage.includes('angular') ? 'active' : ''} onClick={() => navigate('services')}>Dịch vụ</a></li>
-            <li><a className={currentPage.includes('product') ? 'active' : ''} onClick={() => navigate('products')}>Sản phẩm</a></li>
-            <li><a className={currentPage.includes('blog') ? 'active' : ''} onClick={() => navigate('blog')}>Blog</a></li>
-            <li><a className={currentPage === 'about' ? 'active' : ''} onClick={() => navigate('about')}>Giới thiệu</a></li>
-          </ul>
-        </nav>
-      </header>
+    <header>
+      <nav>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <h1 style={{ cursor: 'pointer' }}>Demo Website</h1>
+        </Link>
+        <ul>
+          <li><Link to="/" className={isActive('/') && path === '/' ? 'active' : ''}>Trang chủ</Link></li>
+          <li><Link to="/services" className={isActive('/services') ? 'active' : ''}>Dịch vụ</Link></li>
+          <li><Link to="/products" className={isActive('/products') ? 'active' : ''}>Sản phẩm</Link></li>
+          <li><Link to="/blog" className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>
+          <li><Link to="/about" className={isActive('/about') ? 'active' : ''}>Giới thiệu</Link></li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
 
-      {renderPage()}
+// ==================== MAIN APP ====================
+function App() {
+  return (
+    <Router>
+      <Navigation />
+
+      <Routes>
+        {/* Level 0 */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* Level 1 */}
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/about" element={<AboutPage />} />
+
+        {/* Level 2 */}
+        <Route path="/services/webdev" element={<WebDevPage />} />
+        <Route path="/services/mobile" element={<MobileDevPage />} />
+        <Route path="/services/seo" element={<SEOPage />} />
+        <Route path="/products/a" element={<ProductAPage />} />
+        <Route path="/products/b" element={<ProductBPage />} />
+        <Route path="/blog/post-1" element={<BlogPost1Page />} />
+        <Route path="/blog/post-2" element={<BlogPost2Page />} />
+
+        {/* Level 3 */}
+        <Route path="/services/webdev/frontend" element={<FrontendPage />} />
+        <Route path="/services/webdev/backend" element={<BackendPage />} />
+        <Route path="/services/webdev/fullstack" element={<FullstackPage />} />
+
+        {/* Level 4 */}
+        <Route path="/services/webdev/frontend/react" element={<ReactDetailPage />} />
+        <Route path="/services/webdev/frontend/vue" element={<VueDetailPage />} />
+        <Route path="/services/webdev/frontend/angular" element={<AngularDetailPage />} />
+      </Routes>
 
       <footer>
         <p>&copy; 2024 Demo Website. All rights reserved.</p>
-        <a onClick={() => navigate('about')}>Về chúng tôi</a>
+        <Link to="/about">Về chúng tôi</Link>
       </footer>
-    </>
+    </Router>
   )
 }
 
