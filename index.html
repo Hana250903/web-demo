@@ -3,20 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A demo React application optimized for web performance." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <!-- Thiếu meta viewport - gây lỗi PageSpeed -->
-  <!-- Thiếu meta description - gây lỗi SEO -->
 
   <title>Demo React App</title>
 
-  <!-- Render-blocking Google Fonts -->
+  <!-- Preconnect to Google Fonts domains for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <!-- Inline blocking script -->
-  <script>
-    console.log("Blocking script in head");
-    document.write("<div style='display:none'>Loading...</div>");
-  </script>
 </head>
 
 <body>
