@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // Base URL cho GitHub Pages
-  base: '/web-demo/',
+  // Vercel: không cần base path
+  // GitHub Pages: base: '/web-demo/',
 })
