@@ -3,112 +3,50 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- LỖI 1: Thiếu meta viewport - ảnh hưởng mobile -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-
-  <!-- LỖI 2: Thiếu meta description - ảnh hưởng SEO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A demo React application showcasing web performance optimizations." />
 
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <title>Demo React App</title>
 
-  <!-- LỖI 3: Render-blocking CSS từ external source -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=block"
-    rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Preconnect to domains for faster resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <!-- LỖI 4: Inline blocking script trong head -->
+  <!-- Async load CSS: Preload important stylesheets or load non-critical ones asynchronously -->
+  <!-- Using rel="preload" for fonts for better FCP and rel="stylesheet" with media="print" + onload for non-critical CSS -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Defer external scripts to prevent render-blocking -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
+
+  <!-- Inline scripts moved to end of body or deferred if possible to prevent blocking -->
   <script>
-    console.log("Blocking script 1");
+    console.log("Blocking script 1 (now non-blocking)");
     // Simulate heavy computation
     for (let i = 0; i < 100000; i++) {
       Math.random() * Math.random();
     }
   </script>
 
-  <!-- LỖI 5: External blocking scripts -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-
-  <!-- LỖI 6: Inline CSS lớn -->
-  <style>
-    .unused-class-1 {
-      color: red;
-      font-size: 16px;
-      padding: 20px;
-      margin: 10px;
-    }
-
-    .unused-class-2 {
-      background: blue;
-      border: 1px solid black;
-    }
-
-    .unused-class-3 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .unused-class-4 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    .unused-class-5 {
-      transform: rotate(45deg) scale(1.5) translateX(100px);
-    }
-
-    .unused-class-6 {
-      animation: unused-animation 2s infinite;
-    }
-
-    .unused-class-7 {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .unused-class-8 {
-      background: linear-gradient(to right, red, orange, yellow, green, blue);
-    }
-
-    .unused-class-9 {
-      filter: blur(5px) brightness(1.2) contrast(1.1);
-    }
-
-    .unused-class-10 {
-      backdrop-filter: blur(10px) saturate(180%);
-    }
-
-    @keyframes unused-animation {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-  </style>
-
-</head>
-
-<body>
-  <!-- LỖI 7: Thêm hình ảnh lớn không optimize -->
-  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=4000&q=100" alt="Large unoptimized image"
-    style="position: absolute; opacity: 0.01; width: 1px; height: 1px;">
-
-  <div id="root"></div>
-
-  <script type="module" src="/src/main.jsx"></script>
-
-  <!-- LỖI 8: Scripts cuối trang blocking -->
   <script>
-    // Synchronous heavy operation
-    console.log("End script blocking");
-    document.write('<div style="display:none">Blocking content</div>');
+    // Synchronous heavy operation (document.write removed)
+    console.log("End script (non-blocking after removing document.write)");
+    // The original document.write was a blocking operation and has been removed for performance.
+    // If content needs to be added, it should be done dynamically after DOMContentLoaded.
   </script>
 </body>
 
