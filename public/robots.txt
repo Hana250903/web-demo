@@ -1,0 +1,8 @@
+# robots.txt for Demo Website
+# https://web-demo-tawny-alpha.vercel.app
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://web-demo-tawny-alpha.vercel.app/sitemap.xml

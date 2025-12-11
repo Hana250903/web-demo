@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Level 0 -->
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/</loc>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Level 1 -->
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/products</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/blog</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/about</loc>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Level 2 -->
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/mobile</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/seo</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/products/a</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/products/b</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/blog/post-1</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/blog/post-2</loc>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Level 3 -->
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/frontend</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/backend</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/fullstack</loc>
+    <priority>0.4</priority>
+  </url>
+  
+  <!-- Level 4 -->
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/frontend/react</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/frontend/vue</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://web-demo-tawny-alpha.vercel.app/services/webdev/frontend/angular</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>
