@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 
-// LỖI: Unused imports - tăng bundle size
-import { useEffect, useCallback, useMemo, useRef, useReducer, useContext, createContext } from 'react'
-
-// LỖI: Import toàn bộ thư viện thay vì chỉ cần thiết
-// import _ from 'lodash' // Nếu có
-
 /*
   WEBSITE STRUCTURE - Depth Levels (0-4):
   Level 0: Home (/)
@@ -14,33 +8,9 @@ import { useEffect, useCallback, useMemo, useRef, useReducer, useContext, create
   Level 2-4: Sub pages...
 */
 
-// LỖI: Inline large data - tăng bundle size
-const LARGE_UNUSED_DATA = Array(1000).fill(null).map((_, i) => ({
-  id: i,
-  name: `Item ${i}`,
-  description: `This is a very long description for item number ${i} that adds unnecessary weight to the JavaScript bundle`,
-  data: Array(100).fill(`data-${i}`)
-}));
-
-// LỖI: Heavy computation trong module scope
-const heavyComputation = () => {
-  let result = 0;
-  for (let i = 0; i < 500000; i++) {
-    result += Math.sqrt(i) * Math.random();
-  }
-  return result;
-};
-const COMPUTED_VALUE = heavyComputation();
-
 // ==================== LEVEL 4 PAGES ====================
 function ReactDetailPage({ onNavigate }) {
-  // LỖI: Không cần thiết re-render
-  const [, forceUpdate] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => forceUpdate(n => n + 1), 1000);
-    // LỖI: Memory leak - không cleanup
-  }, []);
-
+  // Fix: Removed unnecessary re-render and memory leak (no more setInterval)
   return (
     <main>
       <section className="page-hero depth-4">
@@ -58,10 +28,10 @@ function ReactDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>React.js Development Services</h3>
-          {/* LỖI: Hình ảnh không có width/height - gây CLS */}
-          <img src="https://picsum.photos/600/300" alt="React" />
+          {/* Fix: Added width/height for CLS */}
+          <img src="https://picsum.photos/600/300" alt="React" width="600" height="300" />
           <p>Chúng tôi cung cấp dịch vụ phát triển React chuyên nghiệp.</p>
-          <p><a href="https://react.dev" target="_blank">Tìm hiểu thêm về React</a></p>
+          <p><a href="https://react.dev" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về React</a></p>
         </article>
       </section>
     </main>
@@ -85,8 +55,9 @@ function VueDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Vue.js Development Services</h3>
-          <img src="https://picsum.photos/600/301" alt="Vue" />
-          <p><a href="https://vuejs.org" target="_blank">Tìm hiểu thêm về Vue</a></p>
+          {/* Fix: Added width/height for CLS */}
+          <img src="https://picsum.photos/600/301" alt="Vue" width="600" height="301" />
+          <p><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Vue</a></p>
         </article>
       </section>
     </main>
@@ -110,8 +81,9 @@ function AngularDetailPage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Angular Development Services</h3>
-          <img src="https://picsum.photos/600/302" alt="Angular" />
-          <p><a href="https://angular.io" target="_blank">Tìm hiểu thêm về Angular</a></p>
+          {/* Fix: Added width/height for CLS */}
+          <img src="https://picsum.photos/600/302" alt="Angular" width="600" height="302" />
+          <p><a href="https://angular.io" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Angular</a></p>
         </article>
       </section>
     </main>
@@ -251,7 +223,7 @@ function SEOPage({ onNavigate }) {
         <h2>SEO Services</h2>
       </section>
       <section className="content">
-        <article><h3>Dịch vụ SEO</h3><p>Tăng thứ hạng website trên Google.</p><p><a href="https://google.com" target="_blank">Google Search</a></p></article>
+        <article><h3>Dịch vụ SEO</h3><p>Tăng thứ hạng website trên Google.</p><p><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Search</a></p></article>
       </section>
     </main>
   );
@@ -306,10 +278,10 @@ function BlogPost1Page({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Các xu hướng web năm 2024</h3>
-          {/* LỖI: Hình không có size */}
-          <img src="https://picsum.photos/800/400" alt="Blog image" />
+          {/* Fix: Added width/height for CLS */}
+          <img src="https://picsum.photos/800/400" alt="Blog image" width="800" height="400" />
           <p>Năm 2024 đánh dấu nhiều thay đổi lớn...</p>
-          <p><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></p>
+          <p><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></p>
         </article>
       </section>
     </main>
@@ -396,7 +368,7 @@ function AboutPage({ onNavigate }) {
         <h2>Về Chúng Tôi</h2>
       </section>
       <section className="about-content">
-        <article><h3>Câu chuyện</h3><p>Lorem ipsum dolor sit amet...</p><p><a href="https://github.com" target="_blank">GitHub</a></p></article>
+        <article><h3>Câu chuyện</h3><p>Lorem ipsum dolor sit amet...</p><p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p></article>
       </section>
     </main>
   );
@@ -404,23 +376,15 @@ function AboutPage({ onNavigate }) {
 
 // ==================== LEVEL 0 PAGE (HOME) ====================
 function HomePage({ onNavigate }) {
-  // LỖI: Không cần thiết effect
-  useEffect(() => {
-    console.log("HomePage mounted");
-    // LỖI: Fetch không cần thiết
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(res => res.json())
-      .then(data => console.log("Fetched unused data:", data.length));
-  }, []);
-
+  // Fix: Removed unnecessary effect and fetch
   return (
     <main>
       <section className="hero depth-0">
         <span className="depth-badge">Depth: 0</span>
         <h2>Chào mừng đến với trang Demo React</h2>
         <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test PageSpeed</p>
-        {/* LỖI: Hình ảnh lớn không có width/height - gây CLS */}
-        <img src="https://picsum.photos/1200/600" alt="Hero image" />
+        {/* Fix: Added width/height for CLS */}
+        <img src="https://picsum.photos/1200/600" alt="Hero image" width="1200" height="600" />
       </section>
 
       <section className="features">
@@ -432,8 +396,8 @@ function HomePage({ onNavigate }) {
       <section className="content">
         <article>
           <h3>Backlinks</h3>
-          <p>Tham khảo tại <a href="https://google.com" target="_blank">Google</a></p>
-          <p>Hoặc xem <a href="https://github.com" target="_blank">GitHub</a></p>
+          <p>Tham khảo tại <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google</a></p>
+          <p>Hoặc xem <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
         </article>
       </section>
     </main>
@@ -444,9 +408,7 @@ function HomePage({ onNavigate }) {
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
-  // LỖI: Console log mỗi render
-  console.log("App rendered at:", new Date().toISOString());
-
+  // Fix: Removed console log on every render
   const navigate = (page) => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
