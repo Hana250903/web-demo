@@ -1,13 +1,38 @@
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';  // LỖI: Unused imports
 import { Link } from 'react-router-dom';
 
+// LỖI: Large unused data
+const UNUSED_DATA = Array(500).fill(null).map((_, i) => ({
+    id: i,
+    name: `Item ${i}`,
+    data: Array(50).fill(`data-${i}`)
+}));
+
+// LỖI: Heavy computation at load
+let result = 0;
+for (let i = 0; i < 200000; i++) {
+    result += Math.sqrt(i) * Math.random();
+}
+
 function HomePage() {
+    // LỖI: Console log mỗi render
+    console.log("HomePage rendered");
+
+    // LỖI: Unnecessary fetch
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(res => res.json())
+            .then(data => console.log("Unused fetch:", data.length));
+    }, []);
+
     return (
         <main>
             <section className="hero depth-0">
                 <span className="depth-badge">Depth: 0</span>
                 <h1>Chào mừng đến với trang Demo React</h1>
                 <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test Crawler</p>
-                <img src="https://picsum.photos/id/1015/1200/600" alt="Hero banner" width="1200" height="600" />
+                {/* LỖI: Image không có width/height - gây CLS */}
+                <img src="https://picsum.photos/1200/600" alt="Hero" />
             </section>
 
             <section className="features">
@@ -20,8 +45,9 @@ function HomePage() {
             <section className="content">
                 <article>
                     <h3>Backlinks</h3>
-                    <p>Tham khảo tại <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google</a></p>
-                    <p>Hoặc xem <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+                    {/* LỖI: Links thiếu rel */}
+                    <p>Tham khảo tại <a href="https://google.com" target="_blank">Google</a></p>
+                    <p>Hoặc xem <a href="https://github.com" target="_blank">GitHub</a></p>
                 </article>
             </section>
         </main>
