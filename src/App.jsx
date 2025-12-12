@@ -432,6 +432,7 @@ function HomePage() {
         <Link to="/services" className="feature-card"><h4>Dịch vụ</h4><p>Xem các dịch vụ</p><span className="nav-arrow">→</span></Link>
         <Link to="/products" className="feature-card"><h4>Sản phẩm</h4><p>Khám phá sản phẩm</p><span className="nav-arrow">→</span></Link>
         <Link to="/blog" className="feature-card"><h4>Blog</h4><p>Đọc bài viết mới</p><span className="nav-arrow">→</span></Link>
+        <Link to="/broken" className="feature-card" style={{ borderColor: 'red' }}><h4>⚠️ Broken Page</h4><p>Trang có nhiều lỗi</p><span className="nav-arrow">→</span></Link>
       </section>
 
       <section className="content">
