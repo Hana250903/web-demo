@@ -1,18 +1,38 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'  // LỖI: Unused imports
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
 import './App.css'
+import BrokenPage from './BrokenPage'  // Import trang có lỗi
+
+// LỖI PERFORMANCE: Large unused data in bundle
+const UNUSED_DATA = Array(500).fill(null).map((_, i) => ({
+  id: i,
+  name: `Item ${i}`,
+  description: `Very long description for item ${i} that wastes bundle size`,
+  data: Array(50).fill(`data-${i}`)
+}));
+
+// LỗI PERFORMANCE: Heavy computation at module load
+let heavyResult = 0;
+for (let i = 0; i < 200000; i++) {
+  heavyResult += Math.sqrt(i) * Math.random();
+}
 
 /*
-  WEBSITE STRUCTURE - Depth Levels (0-4):
-  Level 0: Home (/)
-  Level 1: /services, /products, /blog, /about
-  Level 2: /services/webdev, /services/mobile, /services/seo, /products/a, /products/b, /blog/post-1, /blog/post-2
-  Level 3: /services/webdev/frontend, /services/webdev/backend, /services/webdev/fullstack
-  Level 4: /services/webdev/frontend/react, /services/webdev/frontend/vue, /services/webdev/frontend/angular
+  WEBSITE STRUCTURE - Depth Levels (0-4)
 */
 
 // ==================== LEVEL 4 PAGES ====================
 function ReactDetailPage() {
+  // LỖI: Memory leak - không cleanup interval
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(c => c + 1);
+      console.log("Interval running - wasting resources");
+    }, 1000);
+    // Missing cleanup: return () => clearInterval(interval);
+  }, []);
+
   return (
     <main>
       <section className="page-hero depth-4">
@@ -30,9 +50,11 @@ function ReactDetailPage() {
       <section className="content">
         <article>
           <h3>React.js Development Services</h3>
-          <img src="https://picsum.photos/600/300" alt="React" width="600" height="300" />
+          {/* LỖI SEO: Image không có alt mô tả, không có size */}
+          <img src="https://picsum.photos/600/300" />
           <p>Chúng tôi cung cấp dịch vụ phát triển React chuyên nghiệp.</p>
-          <p><a href="https://react.dev" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về React</a></p>
+          {/* LỖI SEO: Link không có rel */}
+          <p><a href="https://react.dev" target="_blank">Tìm hiểu thêm về React</a></p>
         </article>
       </section>
     </main>
@@ -56,8 +78,8 @@ function VueDetailPage() {
       <section className="content">
         <article>
           <h3>Vue.js Development Services</h3>
-          <img src="https://picsum.photos/600/301" alt="Vue" width="600" height="301" />
-          <p><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Vue</a></p>
+          <img src="https://picsum.photos/600/301" />
+          <p><a href="https://vuejs.org" target="_blank">Tìm hiểu thêm về Vue</a></p>
         </article>
       </section>
     </main>
@@ -81,8 +103,8 @@ function AngularDetailPage() {
       <section className="content">
         <article>
           <h3>Angular Development Services</h3>
-          <img src="https://picsum.photos/600/302" alt="Angular" width="600" height="302" />
-          <p><a href="https://angular.io" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm về Angular</a></p>
+          <img src="https://picsum.photos/600/302" />
+          <p><a href="https://angular.io" target="_blank">Tìm hiểu thêm về Angular</a></p>
         </article>
       </section>
     </main>
@@ -222,7 +244,11 @@ function SEOPage() {
         <h2>SEO Services</h2>
       </section>
       <section className="content">
-        <article><h3>Dịch vụ SEO</h3><p>Tăng thứ hạng website trên Google.</p><p><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Search</a></p></article>
+        <article>
+          <h3>Dịch vụ SEO</h3>
+          <p>Tăng thứ hạng website trên Google.</p>
+          <p><a href="https://google.com" target="_blank">Google Search</a></p>
+        </article>
       </section>
     </main>
   );
@@ -240,7 +266,7 @@ function ProductAPage() {
         <span className="depth-badge">Depth: 2</span>
         <h2>Product A</h2>
       </section>
-      <section className="content"><article><h3>Chi tiết Product A</h3><p>Giải pháp tiên tiến với nhiều tính năng.</p></article></section>
+      <section className="content"><article><h3>Chi tiết Product A</h3><p>Giải pháp tiên tiến.</p></article></section>
     </main>
   );
 }
@@ -257,7 +283,7 @@ function ProductBPage() {
         <span className="depth-badge">Depth: 2</span>
         <h2>Product B</h2>
       </section>
-      <section className="content"><article><h3>Chi tiết Product B</h3><p>Thiết kế cho doanh nghiệp lớn.</p></article></section>
+      <section className="content"><article><h3>Chi tiết Product B</h3><p>Thiết kế cho doanh nghiệp.</p></article></section>
     </main>
   );
 }
@@ -272,14 +298,16 @@ function BlogPost1Page() {
           <span> Bài viết 1</span>
         </div>
         <span className="depth-badge">Depth: 2</span>
-        <h2>Xu hướng Web 2024</h2>
+        {/* LỖI SEO: Thiếu H1 hoặc H2 không đúng thứ tự */}
+        <h3>Xu hướng Web 2024</h3>
       </section>
       <section className="content">
         <article>
-          <h3>Các xu hướng web năm 2024</h3>
-          <img src="https://picsum.photos/800/400" alt="Blog image" width="800" height="400" />
+          <h4>Các xu hướng web năm 2024</h4>
+          {/* LỖI: Image không có alt và size */}
+          <img src="https://picsum.photos/800/400" />
           <p>Năm 2024 đánh dấu nhiều thay đổi lớn...</p>
-          <p><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></p>
+          <p><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></p>
         </article>
       </section>
     </main>
@@ -366,7 +394,11 @@ function AboutPage() {
         <h2>Về Chúng Tôi</h2>
       </section>
       <section className="about-content">
-        <article><h3>Câu chuyện</h3><p>Lorem ipsum dolor sit amet...</p><p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p></article>
+        <article>
+          <h3>Câu chuyện</h3>
+          <p>Lorem ipsum dolor sit amet...</p>
+          <p><a href="https://github.com" target="_blank">GitHub</a></p>
+        </article>
       </section>
     </main>
   );
@@ -374,13 +406,26 @@ function AboutPage() {
 
 // ==================== LEVEL 0 PAGE (HOME) ====================
 function HomePage() {
+  // LỖI: Console log mỗi render
+  console.log("HomePage rendered at:", new Date().toISOString());
+
+  // LỖI: Fetch không cần thiết
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(res => res.json())
+      .then(data => console.log("Fetched unused data:", data.length));
+  }, []);
+
   return (
     <main>
       <section className="hero depth-0">
         <span className="depth-badge">Depth: 0</span>
+        {/* LỖI SEO: Nhiều H1 hoặc heading không đúng thứ tự */}
+        <h1>Website Demo</h1>
         <h2>Chào mừng đến với trang Demo React</h2>
         <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test Crawler</p>
-        <img src="https://picsum.photos/1200/600" alt="Hero image" width="1200" height="600" />
+        {/* LỖI CLS: Image không có width/height */}
+        <img src="https://picsum.photos/1200/600" alt="Hero" />
       </section>
 
       <section className="features">
@@ -392,8 +437,9 @@ function HomePage() {
       <section className="content">
         <article>
           <h3>Backlinks</h3>
-          <p>Tham khảo tại <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google</a></p>
-          <p>Hoặc xem <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+          {/* LỖI SEO: Links thiếu rel="noopener noreferrer" */}
+          <p>Tham khảo tại <a href="https://google.com" target="_blank">Google</a></p>
+          <p>Hoặc xem <a href="https://github.com" target="_blank">GitHub</a></p>
         </article>
       </section>
     </main>
@@ -430,21 +476,19 @@ function Navigation() {
 
 // ==================== MAIN APP ====================
 function App() {
+  // LỖI: Console log mỗi render
+  console.log("App rendered");
+
   return (
     <Router>
       <Navigation />
 
       <Routes>
-        {/* Level 0 */}
         <Route path="/" element={<HomePage />} />
-
-        {/* Level 1 */}
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/about" element={<AboutPage />} />
-
-        {/* Level 2 */}
         <Route path="/services/webdev" element={<WebDevPage />} />
         <Route path="/services/mobile" element={<MobileDevPage />} />
         <Route path="/services/seo" element={<SEOPage />} />
@@ -452,16 +496,13 @@ function App() {
         <Route path="/products/b" element={<ProductBPage />} />
         <Route path="/blog/post-1" element={<BlogPost1Page />} />
         <Route path="/blog/post-2" element={<BlogPost2Page />} />
-
-        {/* Level 3 */}
         <Route path="/services/webdev/frontend" element={<FrontendPage />} />
         <Route path="/services/webdev/backend" element={<BackendPage />} />
         <Route path="/services/webdev/fullstack" element={<FullstackPage />} />
-
-        {/* Level 4 */}
         <Route path="/services/webdev/frontend/react" element={<ReactDetailPage />} />
         <Route path="/services/webdev/frontend/vue" element={<VueDetailPage />} />
         <Route path="/services/webdev/frontend/angular" element={<AngularDetailPage />} />
+        <Route path="/broken" element={<BrokenPage />} />
       </Routes>
 
       <footer>
