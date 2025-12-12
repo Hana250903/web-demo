@@ -3,13 +3,25 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="title" content="Demo" />
   <!-- LỖI: Thiếu viewport - ảnh hưởng mobile -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- LỖI: Thiếu description -->
+  <meta name="description" content="Đây là một trang demo để kiểm tra và khắc phục các lỗi SEO và hiệu suất." />
 
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <title>Demo</title>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.example.com/demo" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Demo" />
+  <meta property="og:description" content="Đây là một trang demo để kiểm tra và khắc phục các lỗi SEO và hiệu suất." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.example.com/demo" />
+  <meta property="og:image" content="https://www.example.com/demo-image.jpg" />
 
   <!-- LỖI: Render-blocking CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=block"
@@ -18,16 +30,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- LỖI: Blocking scripts trong head -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <!-- Đã di chuyển xuống cuối body với defer -->
 
   <!-- LỖI: Inline blocking script -->
-  <script>
-    console.log("Blocking script");
-    for (let i = 0; i < 100000; i++) {
-      Math.random() * Math.random();
-    }
-  </script>
+  <!-- Đã di chuyển xuống cuối body -->
 
   <!-- LỖI: Unused CSS -->
   <style>
@@ -61,15 +67,25 @@
 
 <body>
   <!-- LỖI: Large unoptimized image -->
-  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=4000&q=100"
-    style="position: absolute; opacity: 0.01; width: 1px; height: 1px;">
+  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=4000&q=100" alt=""
+    style="position: absolute; opacity: 0.01; width: 1px; height: 1px;" loading="lazy">
 
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 
   <!-- LỖI: document.write -->
+  <!-- Đã loại bỏ document.write vì nó là một phương pháp chặn hiển thị -->
+
+  <!-- Các script blocking đã được di chuyển từ head xuống cuối body và thêm thuộc tính defer -->
+  <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+  <!-- Inline blocking script đã được di chuyển từ head xuống cuối body -->
   <script>
-    document.write('<div style="display:none">Blocking</div>');
+    console.log("Blocking script");
+    for (let i = 0; i < 100000; i++) {
+      Math.random() * Math.random();
+    }
   </script>
 </body>
 
