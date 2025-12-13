@@ -43,6 +43,7 @@ function App() {
   return (
     <Router>
       <Navigation />
+      <img alt="Hero" src="https://picsum.photos/1200/600" loading="lazy" />
 
       <Routes>
         {/* Level 0 */}
