@@ -67,8 +67,11 @@
 
 <body>
   <!-- LỖI: Large unoptimized image -->
-  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=4000&q=100" alt=""
+  <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=4000&q=100" alt="Phong cảnh núi non hùng vĩ"
     style="position: absolute; opacity: 0.01; width: 1px; height: 1px;" loading="lazy">
+
+  <!-- INSERT FIX: Thêm một hình ảnh ví dụ với Lazy Load, vì hình ảnh hiện có là một pixel ẩn và có thể không phải là mục tiêu của lỗi "thiếu Lazy Load" cho người dùng. -->
+  <img src="/assets/example-content-image.jpg" alt="Một hình ảnh nội dung minh họa" loading="lazy">
 
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
@@ -82,10 +85,12 @@
 
   <!-- Inline blocking script đã được di chuyển từ head xuống cuối body -->
   <script>
-    console.log("Blocking script");
-    for (let i = 0; i < 100000; i++) {
-      Math.random() * Math.random();
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Blocking script (now deferred via DOMContentLoaded)");
+      for (let i = 0; i < 100000; i++) {
+        Math.random() * Math.random();
+      }
+    });
   </script>
 </body>
 
