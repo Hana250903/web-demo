@@ -88,9 +88,9 @@ export function BrokenComponent() {
             </div>
 
             {/* LỖI: Images không có alt, width, height */}
-            <img src="https://picsum.photos/400/200" />
-            <img src="https://picsum.photos/400/201" />
-            <img src="https://picsum.photos/400/202" />
+            <img src="https://picsum.photos/400/200" alt="Placeholder image 1" loading="lazy" />
+            <img src="https://picsum.photos/400/201" alt="Placeholder image 2" loading="lazy" />
+            <img src="https://picsum.photos/400/202" alt="Placeholder image 3" loading="lazy" />
 
             {/* LỖI SEO: Links không có rel */}
             <a href="https://google.com" target="_blank">Google</a>
@@ -127,10 +127,10 @@ export function AccessibilityBrokenComponent() {
             <img src="https://picsum.photos/300/150" />
 
             {/* LỖI A11Y: Button không có accessible name */}
-            <button onClick={() => console.log("clicked")}></button>
+            <button onClick={() => console.log("clicked")}>Click for Action</button>
 
             {/* LỖI A11Y: Link không có text */}
-            <a href="/somewhere"></a>
+            <a href="/somewhere">Accessible Link</a>
 
             {/* LỖI A11Y: Form input không có label */}
             <input type="text" placeholder="Enter name" />
@@ -159,8 +159,8 @@ export function SEOBrokenComponent() {
         <main>
             {/* LỖI SEO: Multiple H1 */}
             <h1>First H1</h1>
-            <h1>Second H1</h1>
-            <h1>Third H1</h1>
+            <h2>Second H1</h2>
+            <h3>Third H1</h3>
 
             {/* LỖI SEO: Skipped heading levels */}
             <h1>Main Title</h1>
@@ -173,7 +173,7 @@ export function SEOBrokenComponent() {
             <a href="/page3">Learn more</a>
 
             {/* LỖI SEO: Empty links */}
-            <a href="/somewhere"></a>
+            <a href="/somewhere">SEO Optimized Link</a>
 
             {/* LỖI SEO: Images không có alt */}
             <img src="https://picsum.photos/500/250" />
