@@ -31,8 +31,7 @@ function HomePage() {
                 <span className="depth-badge">Depth: 0</span>
                 <h1>Chào mừng đến với trang Demo React</h1>
                 <p>Website React với cấu trúc 5 cấp độ sâu (0-4) để test Crawler</p>
-                {/* LỖI: Image không có width/height - gây CLS */}
-                <img src="https://picsum.photos/1200/600" alt="Hero" />
+                <img src="https://picsum.photos/1200/600" alt="Hero" loading="lazy" width="1200" height="600" />
             </section>
 
             <section className="features">
