@@ -44,49 +44,51 @@ function App() {
     <Router>
       <Navigation />
 
-      <Routes>
-        {/* Level 0 */}
-        <Route path="/" element={<HomePage />} />
+      <main>
+        <Routes>
+          {/* Level 0 */}
+          <Route path="/" element={<HomePage />} />
 
-        {/* Level 1 */}
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/about" element={<AboutPage />} />
+          {/* Level 1 */}
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/about" element={<AboutPage />} />
 
-        {/* Level 2 - Services */}
-        <Route path="/services/webdev" element={<WebDevPage />} />
-        <Route path="/services/mobile" element={<MobileDevPage />} />
-        <Route path="/services/seo" element={<SEOPage />} />
+          {/* Level 2 - Services */}
+          <Route path="/services/webdev" element={<WebDevPage />} />
+          <Route path="/services/mobile" element={<MobileDevPage />} />
+          <Route path="/services/seo" element={<SEOPage />} />
 
-        {/* Level 2 - Products */}
-        <Route path="/products/a" element={<ProductAPage />} />
-        <Route path="/products/b" element={<ProductBPage />} />
+          {/* Level 2 - Products */}
+          <Route path="/products/a" element={<ProductAPage />} />
+          <Route path="/products/b" element={<ProductBPage />} />
 
-        {/* Level 2 - Blog */}
-        <Route path="/blog/post-1" element={<BlogPost1Page />} />
-        <Route path="/blog/post-2" element={<BlogPost2Page />} />
+          {/* Level 2 - Blog */}
+          <Route path="/blog/post-1" element={<BlogPost1Page />} />
+          <Route path="/blog/post-2" element={<BlogPost2Page />} />
 
-        {/* Level 3 - WebDev */}
-        <Route path="/services/webdev/frontend" element={<FrontendPage />} />
-        <Route path="/services/webdev/backend" element={<BackendPage />} />
-        <Route path="/services/webdev/fullstack" element={<FullstackPage />} />
+          {/* Level 3 - WebDev */}
+          <Route path="/services/webdev/frontend" element={<FrontendPage />} />
+          <Route path="/services/webdev/backend" element={<BackendPage />} />
+          <Route path="/services/webdev/fullstack" element={<FullstackPage />} />
 
-        {/* Level 4 - Frontend */}
-        <Route path="/services/webdev/frontend/react" element={<ReactDetailPage />} />
-        <Route path="/services/webdev/frontend/vue" element={<VueDetailPage />} />
-        <Route path="/services/webdev/frontend/angular" element={<AngularDetailPage />} />
+          {/* Level 4 - Frontend */}
+          <Route path="/services/webdev/frontend/react" element={<ReactDetailPage />} />
+          <Route path="/services/webdev/frontend/vue" element={<VueDetailPage />} />
+          <Route path="/services/webdev/frontend/angular" element={<AngularDetailPage />} />
 
-        {/* Test Page */}
-        <Route path="/broken" element={<BrokenPage />} />
-      </Routes>
+          {/* Test Page */}
+          <Route path="/broken" element={<BrokenPage />} />
+        </Routes>
+      </main>
 
       <footer>
         <p>&copy; 2024 Demo Website. All rights reserved.</p>
-        <Link to="/about">Về chúng tôi</Link>
+        <Link to="/about" title="Tìm hiểu thêm về chúng tôi">Về chúng tôi</Link>
         <div>
           <label htmlFor="search-input">Tìm kiếm:</label>
-          <input type="text" id="search-input" placeholder="Nhập từ khóa..." />
+          <input type="text" id="search-input" placeholder="Nhập từ khóa..." aria-label="Tìm kiếm" />
         </div>
       </footer>
     </Router>
