@@ -50,7 +50,7 @@ function HomePage() {
         <main>
             {/* LỖI seo-multiple-h1 */}
             <h1>Tiêu đề H1 thứ nhất</h1>
-            <h1>Tiêu đề H1 thứ hai</h1>
+            <h2>Tiêu đề H2 phụ</h2>
 
             <section className="hero depth-0">
                 <span className="depth-badge">Depth: 0 | Count: {count} | Result: {renderResult.toFixed(2)}</span>
@@ -58,11 +58,11 @@ function HomePage() {
                 <p>Website React - Heavy result: {HEAVY_RESULT.toFixed(2)}</p>
 
                 {/* LỖI CLS: Images không có width/height - gây Layout Shift */}
-                <img src="https://picsum.photos/1200/600" />
-                <img src="https://picsum.photos/1000/500" />
-                <img src="https://picsum.photos/800/400" />
-                <img src="https://picsum.photos/600/300" />
-                <img src="https://picsum.photos/400/200" />
+                <img src="https://picsum.photos/1200/600" alt="Ảnh minh họa lớn" loading="lazy" width="1200" height="600" />
+                <img src="https://picsum.photos/1000/500" alt="Ảnh minh họa trung bình" loading="lazy" width="1000" height="500" />
+                <img src="https://picsum.photos/800/400" alt="Ảnh minh họa nhỏ hơn" loading="lazy" width="800" height="400" />
+                <img src="https://picsum.photos/600/300" alt="Ảnh minh họa ngang" loading="lazy" width="600" height="300" />
+                <img src="https://picsum.photos/400/200" alt="Ảnh minh họa nhỏ" loading="lazy" width="400" height="200" />
             </section>
 
             <section className="features">
@@ -81,9 +81,9 @@ function HomePage() {
             </section>
 
             {/* LỖI a11y */}
-            <button></button>
+            <button>Click Me</button>
             <input type="text" />
-            <a href="/empty"></a>
+            <a href="/empty">Empty Link Page</a>
 
             {/* LỖI perf-inline-css: >10KB */}
             <style>
