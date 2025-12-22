@@ -84,6 +84,10 @@ function App() {
       <footer>
         <p>&copy; 2024 Demo Website. All rights reserved.</p>
         <Link to="/about">Về chúng tôi</Link>
+        <div>
+          <label htmlFor="search-input">Tìm kiếm:</label>
+          <input type="text" id="search-input" placeholder="Nhập từ khóa..." />
+        </div>
       </footer>
     </Router>
   )
