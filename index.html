@@ -3,65 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="title" content="Demo" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demo</title>
-
-  <meta name="description" content="Đây là một trang demo để kiểm tra và khắc phục các lỗi SEO và hiệu suất." />
-
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-
-  <link rel="canonical" href="https://www.example.com/demo" />
-
-  <meta property="og:title" content="Demo" />
-  <meta property="og:description" content="Đây là một trang demo để kiểm tra và khắc phục các lỗi SEO và hiệu suất." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.example.com/demo" />
-  <meta property="og:image" content="https://www.example.com/demo-image.jpg" />
-
-  <!-- Preconnect and DNS-prefetch for critical third-party domains -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://code.jquery.com">
-  <link rel="dns-prefetch" href="https://code.jquery.com">
-
-  <!-- Preload critical CSS asynchronously to prevent render blocking -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=block" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=block"></noscript>
-
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></noscript>
-
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></noscript>
-
-  <!-- Removed unused CSS classes from the style block -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Demo React App - Website với cấu trúc 5 cấp độ sâu" />
+  <title>Demo React App</title>
 </head>
 
 <body>
   <div id="root"></div>
-
-  <!-- Scripts moved to the end of the body and deferred to prevent render blocking -->
-  <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      console.log("Blocking script (now deferred via DOMContentLoaded)");
-      for (let i = 0; i < 100000; i++) {
-        Math.random() * Math.random();
-      }
-    });
-  </script>
-
-  <!-- Main application script, deferred and with crossorigin as per error description -->
-  <script type="module" defer crossorigin="" src="/src/main.jsx"></script>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>
