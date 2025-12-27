@@ -11,13 +11,18 @@
   <meta property="og:title" content="Demo React App" />
   <meta property="og:description" content="Demo React App - Website với cấu trúc 5 cấp độ sâu" />
   <meta property="og:image" content="https://www.example.com/og-image.jpg" />
+
+  <!-- Preconnect để tối ưu font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Load font với font-display: swap để tránh FOIT -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div id="root"></div>
-  <link rel="preload" href="/assets/index-CYOORzQI.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="">
-  <noscript><link rel="stylesheet" href="/assets/index-CYOORzQI.css" crossorigin=""></noscript>
-  <script type="module" src="/src/main.jsx" async></script>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>
