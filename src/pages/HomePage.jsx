@@ -75,7 +75,7 @@ function HomePage() {
     // 8. Synchronous blocking render
     const blockingRender = () => {
         let html = '';
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 10; i++) {
             html += `<div class="blocking-item-${i}">Item ${i}</div>`;
         }
         return html;
@@ -220,7 +220,7 @@ function HomePage() {
 
             {/* 20. Long list with complex styles */}
             <ul style={{ listStyle: 'none', padding: 0 }}>
-                {Array.from({ length: 100 }, (_, i) => (
+                {Array.from({ length: 10 }, (_, i) => (
                     <li key={i} style={{
                         padding: '15px',
                         margin: '10px 0',
