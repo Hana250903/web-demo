@@ -10,15 +10,16 @@ function HomePage() {
                 <h2>Chào mừng đến với trang Demo React</h2>
                 <p>Website React - Performance Demo</p>
 
-                {/* === LỖI: Images thiếu alt, width, height, lazy - TOOL SẼ DETECT, AI CÓ THỂ FIX === */}
-                <img src="https://picsum.photos/1200/600" className="hero-main-image" />
-                <img src="https://picsum.photos/800/400" className="hero-secondary-image" />
-                <img src="https://picsum.photos/600/300" />
+                {/* === LỖI: Images thiếu alt, width, height, lazy === */}
+                {/* Tool detect: img-missing-alt, img-missing-lazy, perf-cls-images-no-dimensions */}
+                {/* AI fix: thêm alt, loading="lazy", width, height */}
+                <img src="https://picsum.photos/800/400" className="hero-main-image" />
+                <img src="https://picsum.photos/600/300" className="hero-secondary-image" />
 
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
-                    <img src="https://picsum.photos/300/200?random=1" />
-                    <img src="https://picsum.photos/300/200?random=2" />
-                    <img src="https://picsum.photos/300/200?random=3" />
+                    <img src="https://picsum.photos/200/150?random=1" />
+                    <img src="https://picsum.photos/200/150?random=2" />
+                    <img src="https://picsum.photos/200/150?random=3" />
                 </div>
             </section>
 
@@ -29,28 +30,13 @@ function HomePage() {
                 <Link to="/broken" className="feature-card" style={{ borderColor: 'red' }}><h4>⚠️ Broken</h4><p>Trang lỗi</p><span className="nav-arrow">→</span></Link>
             </section>
 
-            {/* === LỖI: Accessibility - TOOL SẼ DETECT, AI CÓ THỂ FIX === */}
+            {/* === LỖI: Accessibility === */}
+            {/* Tool detect: a11y-missing-button-text, a11y-missing-form-labels, a11y-empty-links */}
+            {/* AI fix: thêm text, label, aria-label */}
             <section className="form-section">
                 <button className="empty-submit-btn"></button>
                 <input type="text" className="search-input-field" />
                 <a href="/empty-link" className="icon-link"></a>
-            </section>
-
-            {/* === LỖI: Heavy CSS - TOOL SẼ DETECT === */}
-            <section style={{ marginTop: '30px' }}>
-                {[...Array(5)].map((_, i) => (
-                    <div key={i} style={{
-                        padding: '20px',
-                        margin: '10px 0',
-                        background: `linear-gradient(${i * 36}deg, #667eea, #764ba2)`,
-                        boxShadow: '0 10px 40px rgba(0,0,0,0.3), 0 5px 20px rgba(0,0,0,0.2), 0 2px 10px rgba(0,0,0,0.1)',
-                        borderRadius: '10px',
-                        backdropFilter: 'blur(5px)',
-                        filter: 'brightness(1.1)'
-                    }}>
-                        <p style={{ color: 'white', margin: 0 }}>Heavy CSS element {i + 1}</p>
-                    </div>
-                ))}
             </section>
 
             <section className="content">
