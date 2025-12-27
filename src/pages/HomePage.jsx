@@ -12,32 +12,27 @@ function HomePage() {
                 <img
                     src="https://picsum.photos/3840/2160"
                     className="hero-main-image"
-                    loading="lazy"
                 />
 
                 {/* LỖI: Thêm nhiều ảnh lớn để làm chậm LCP */}
                 <img
                     src="https://picsum.photos/2560/1440"
                     className="hero-secondary-image"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1920/1080"
                     className="hero-third-image"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1600/900"
                     className="hero-fourth-image"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1280/720"
                     className="hero-fifth-image"
-                    loading="lazy"
                 />
 
             </section>
