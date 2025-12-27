@@ -16,7 +16,7 @@ function Navigation() {
                     <span>Demo Website</span>
                 </Link>
                 <ul>
-                    <li><Link to="/" className={path === '/' ? 'active' : ''}>Trang chủ</Link></li>
+                    <li><Link to="/" className={isActive('/') && path === '/' ? 'active' : ''}>Trang chủ</Link></li>
                     <li><Link to="/services" className={isActive('/services') ? 'active' : ''}>Dịch vụ</Link></li>
                     <li><Link to="/products" className={isActive('/products') ? 'active' : ''}>Sản phẩm</Link></li>
                     <li><Link to="/blog" className={isActive('/blog') ? 'active' : ''}>Blog</Link></li>

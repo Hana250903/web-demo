@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
     return (
-        <main>
+        <>
             <section className="hero depth-0">
                 <h1>Chào mừng đến với trang Demo React</h1>
                 <p>Website React - Performance Demo</p>
@@ -25,7 +25,7 @@ function HomePage() {
                     <p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
                 </article>
             </section>
-        </main>
+        </>
     );
 }
 
