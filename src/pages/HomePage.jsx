@@ -1,69 +1,101 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+// === BLOCKING CODE CHẠY NGAY KHI MODULE LOAD (trước render) ===
+// Đây là cách thực sự block main thread
+const startTime = performance.now();
+let heavyResult = 0;
+for (let i = 0; i < 10000000; i++) {
+    heavyResult += Math.sqrt(i) * Math.sin(i) * Math.cos(i);
+}
+console.log(`Module-level blocking took: ${performance.now() - startTime}ms`);
+
+// Thêm blocking computation
+function expensiveCalculation() {
+    let result = 0;
+    for (let i = 0; i < 5000000; i++) {
+        result += Math.pow(i, 0.5) * Math.log(i + 1);
+    }
+    return result;
+}
+
 function HomePage() {
     const [lateContent, setLateContent] = useState(false);
-    const [dynamicHeight, setDynamicHeight] = useState('auto');
+    const [extraContent, setExtraContent] = useState(false);
+
+    // === BLOCKING TRONG RENDER FUNCTION ===
+    // Chạy mỗi lần render
+    const renderBlockingResult = expensiveCalculation();
 
     useEffect(() => {
-        // === PERFORMANCE ISSUE 1: Blocking JavaScript (tăng TBT) ===
-        // Chạy heavy computation ngay khi component mount
-        const startTime = performance.now();
-        let result = 0;
-        for (let i = 0; i < 5000000; i++) {
-            result += Math.sqrt(i) * Math.sin(i);
-        }
-        console.log(`Blocking JS took: ${performance.now() - startTime}ms`);
-
-        // === PERFORMANCE ISSUE 2: Late Layout Shift (tăng CLS) ===
-        // Inject content sau 500ms gây layout shift
+        // === CLS: Multiple late layout shifts ===
         setTimeout(() => {
             setLateContent(true);
-            setDynamicHeight('150px');
-        }, 500);
+        }, 300);
+
+        setTimeout(() => {
+            setExtraContent(true);
+        }, 800);
     }, []);
 
     return (
         <main>
-            {/* SEO Issue: Multiple H1 */}
+            {/* SEO Issues */}
             <h1>Tiêu đề H1 chính của trang</h1>
             <h1>Tiêu đề H1 thứ hai - gây lỗi SEO</h1>
-
             <h2>Tiêu đề H2 phụ</h2>
 
-            {/* === PERFORMANCE ISSUE 3: CLS từ dynamic content === */}
+            {/* === CLS ISSUE 1: Late injected banner === */}
             {lateContent && (
                 <div style={{
-                    height: dynamicHeight,
-                    background: 'linear-gradient(45deg, #ff6b6b, #feca57)',
-                    padding: '20px',
+                    height: '200px',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    padding: '30px',
                     marginBottom: '20px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'white',
                     fontWeight: 'bold',
-                    fontSize: '18px'
+                    fontSize: '24px'
                 }}>
-                    ⚠️ NỘI DUNG LOAD MUỘN - GÂY LAYOUT SHIFT ⚠️
+                    ⚠️ BANNER LOAD MUỘN - GÂY LAYOUT SHIFT LỚN ⚠️
+                </div>
+            )}
+
+            {/* === CLS ISSUE 2: Another late content === */}
+            {extraContent && (
+                <div style={{
+                    height: '150px',
+                    background: '#ff6b6b',
+                    padding: '20px',
+                    marginBottom: '20px',
+                    color: 'white',
+                    fontSize: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    🔴 NỘI DUNG BỔ SUNG - THÊM LAYOUT SHIFT 🔴
                 </div>
             )}
 
             <section className="hero depth-0">
                 <h2>Chào mừng đến với trang Demo React</h2>
-                <p>Website React - Performance Demo</p>
+                <p>Website React - Performance Demo (Result: {renderBlockingResult.toFixed(2)})</p>
 
-                {/* === PERFORMANCE ISSUE 4: Large unoptimized images (tăng LCP) === */}
-                {/* Ảnh lớn không có width/height gây reflow */}
-                <img src="https://picsum.photos/2000/1200" className="hero-image-main" />
-                <img src="https://picsum.photos/1800/1000" className="hero-image-secondary" />
+                {/* === LCP ISSUES: Very large images === */}
+                <img src="https://picsum.photos/3000/2000" className="hero-image-main" />
+                <img src="https://picsum.photos/2500/1500" className="hero-image-secondary" />
 
-                {/* === PERFORMANCE ISSUE 5: Nhiều ảnh nhỏ không lazy load === */}
+                {/* === More images = slower load === */}
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
-                    <img src="https://picsum.photos/300/200?random=1" />
-                    <img src="https://picsum.photos/300/200?random=2" />
-                    <img src="https://picsum.photos/300/200?random=3" />
-                    <img src="https://picsum.photos/300/200?random=4" />
+                    <img src="https://picsum.photos/400/300?random=1" />
+                    <img src="https://picsum.photos/400/300?random=2" />
+                    <img src="https://picsum.photos/400/300?random=3" />
+                    <img src="https://picsum.photos/400/300?random=4" />
+                    <img src="https://picsum.photos/400/300?random=5" />
+                    <img src="https://picsum.photos/400/300?random=6" />
                 </div>
             </section>
 
@@ -81,6 +113,24 @@ function HomePage() {
                 <a href="/empty-link" className="icon-link"></a>
             </section>
 
+            {/* === HEAVY CSS ELEMENTS === */}
+            <section style={{ marginTop: '30px' }}>
+                {[...Array(20)].map((_, i) => (
+                    <div key={i} style={{
+                        padding: '20px',
+                        margin: '10px 0',
+                        background: `linear-gradient(${i * 18}deg, #667eea, #764ba2)`,
+                        boxShadow: '0 10px 40px rgba(0,0,0,0.3), 0 5px 20px rgba(0,0,0,0.2), 0 2px 10px rgba(0,0,0,0.1)',
+                        borderRadius: '10px',
+                        backdropFilter: 'blur(5px)',
+                        transform: 'translateZ(0)',
+                        willChange: 'transform'
+                    }}>
+                        <p style={{ color: 'white', margin: 0 }}>Heavy styled element {i + 1}</p>
+                    </div>
+                ))}
+            </section>
+
             <section className="content">
                 <article>
                     <h3>Backlinks</h3>
@@ -88,17 +138,6 @@ function HomePage() {
                     <p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
                 </article>
             </section>
-
-            {/* === PERFORMANCE ISSUE 6: Heavy inline styles (tăng render time) === */}
-            <div style={{
-                boxShadow: '0 0 50px rgba(0,0,0,0.3), 0 0 100px rgba(0,0,0,0.2)',
-                filter: 'blur(0px)',
-                transform: 'translateZ(0)',
-                willChange: 'transform, opacity',
-                backdropFilter: 'blur(5px)'
-            }}>
-                <p>Element với heavy CSS effects</p>
-            </div>
         </main>
     );
 }
