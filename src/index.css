@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
+/* Header - Cố định chiều cao để tránh CLS */
 header {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -22,6 +22,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  min-height: 70px;
+  /* Reserve space */
 }
 
 nav {
@@ -67,11 +69,13 @@ nav a.active {
   color: white;
 }
 
-/* Main content */
+/* Main content - Reserve space để tránh CLS */
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 600px;
+  /* Reserve space cho content */
 }
 
 /* Hero section with depth indicators */
@@ -310,14 +314,7 @@ footer a:hover {
   }
 }
 
-.hero,
-.page-hero,
-.content,
-.features,
-.about-hero,
-.about-content {
-  /* Animation removed to avoid CLS */
-}
+/* Elements không cần animation - tránh CLS */
 
 /* Responsive */
 @media (max-width: 768px) {

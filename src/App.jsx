@@ -2,8 +2,8 @@ import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 
-// Components
-const Navigation = React.lazy(() => import('./components/Navigation'))
+// Components - Import trực tiếp (không lazy) vì Navigation luôn hiển thị
+import Navigation from './components/Navigation'
 
 // Pages - Level 0
 const HomePage = React.lazy(() => import('./pages/HomePage'))
@@ -43,12 +43,14 @@ const BrokenPage = React.lazy(() => import('./BrokenPage'))
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div>Đang tải điều hướng...</div>}>
-        <Navigation />
-      </Suspense>
+      <Navigation />
 
       <main>
-        <Suspense fallback={<div>Đang tải...</div>}>
+        <Suspense fallback={
+          <div style={{ minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <p>Đang tải...</p>
+          </div>
+        }>
           <Routes>
             {/* Level 0 */}
             <Route path="/" element={<HomePage />} />
