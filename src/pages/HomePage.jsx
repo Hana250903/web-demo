@@ -5,13 +5,29 @@ function HomePage() {
         <>
             <section className="hero">
                 <h1>Chào mừng đến với trang Demo React</h1>
+                <h1>Website React Demo</h1>
                 <p>Website React - Performance Demo</p>
+
+                {/* Lỗi img-missing-alt + perf-cls-images-no-dimensions: thiếu alt, width, height */}
                 <img
                     src="https://picsum.photos/800/400"
-                    alt="Hero image"
-                    width="800"
-                    height="400"
+                    className="hero-main-image"
                 />
+
+                {/* Lỗi img-missing-alt + img-missing-lazy: thiếu alt và lazy */}
+                <img
+                    src="https://picsum.photos/600/300"
+                    className="hero-secondary-image"
+                />
+
+            </section>
+
+            {/* Lỗi perf-too-many-images: quá nhiều ảnh */}
+            <section className="gallery">
+                <img src="https://picsum.photos/200/150?random=1" />
+                <img src="https://picsum.photos/200/150?random=2" />
+                <img src="https://picsum.photos/200/150?random=3" />
+                <img src="https://picsum.photos/200/150?random=4" />
             </section>
 
             <section className="features">
@@ -27,6 +43,18 @@ function HomePage() {
                     <h4>Blog</h4>
                     <p>Đọc bài viết mới</p>
                 </Link>
+            </section>
+
+            {/* Lỗi Accessibility */}
+            <section className="form-section">
+                {/* a11y-missing-button-text */}
+                <button className="empty-submit-btn"></button>
+
+                {/* a11y-missing-form-labels */}
+                <input type="text" className="search-input-field" />
+
+                {/* a11y-empty-links */}
+                <a href="/empty-link" className="icon-link"></a>
             </section>
         </>
     );
