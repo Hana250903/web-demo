@@ -42,8 +42,7 @@ function HomePage() {
         <main>
             {/* SEO Issues */}
             <h1>Tiêu đề H1 chính của trang</h1>
-            <h1>Tiêu đề H1 thứ hai - gây lỗi SEO</h1>
-            <h2>Tiêu đề H2 phụ</h2>
+            <h2>Tiêu đề H2 thứ hai - đã sửa lỗi SEO</h2> {/* Changed from H1 to H2 */}
 
             {/* === CLS ISSUE 1: Late injected banner === */}
             {lateContent && (
@@ -85,17 +84,17 @@ function HomePage() {
                 <p>Website React - Performance Demo (Result: {renderBlockingResult.toFixed(2)})</p>
 
                 {/* === LCP ISSUES: Very large images === */}
-                <img src="https://picsum.photos/3000/2000" className="hero-image-main" />
-                <img src="https://picsum.photos/2500/1500" className="hero-image-secondary" />
+                <img src="https://picsum.photos/3000/2000" className="hero-image-main" alt="Main hero image showing a scenic view" loading="lazy" width="3000" height="2000" />
+                <img src="https://picsum.photos/2500/1500" className="hero-image-secondary" alt="Secondary hero image with a different landscape" loading="lazy" width="2500" height="1500" />
 
                 {/* === More images = slower load === */}
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
-                    <img src="https://picsum.photos/400/300?random=1" />
-                    <img src="https://picsum.photos/400/300?random=2" />
-                    <img src="https://picsum.photos/400/300?random=3" />
-                    <img src="https://picsum.photos/400/300?random=4" />
-                    <img src="https://picsum.photos/400/300?random=5" />
-                    <img src="https://picsum.photos/400/300?random=6" />
+                    <img src="https://picsum.photos/400/300?random=1" alt="Random image 1" loading="lazy" width="400" height="300" />
+                    <img src="https://picsum.photos/400/300?random=2" alt="Random image 2" loading="lazy" width="400" height="300" />
+                    <img src="https://picsum.photos/400/300?random=3" alt="Random image 3" loading="lazy" width="400" height="300" />
+                    <img src="https://picsum.photos/400/300?random=4" alt="Random image 4" loading="lazy" width="400" height="300" />
+                    <img src="https://picsum.photos/400/300?random=5" alt="Random image 5" loading="lazy" width="400" height="300" />
+                    <img src="https://picsum.photos/400/300?random=6" alt="Random image 6" loading="lazy" width="400" height="300" />
                 </div>
             </section>
 
@@ -108,9 +107,10 @@ function HomePage() {
 
             {/* Accessibility Issues */}
             <section className="form-section">
-                <button className="empty-submit-btn"></button>
-                <input type="text" className="search-input-field" />
-                <a href="/empty-link" className="icon-link"></a>
+                <button className="empty-submit-btn">Gửi</button> {/* Added text */}
+                <label htmlFor="search-input">Tìm kiếm:</label> {/* Added label */}
+                <input id="search-input" type="text" className="search-input-field" /> {/* Added id */}
+                <a href="/empty-link" className="icon-link">Liên kết trống</a> {/* Added text */}
             </section>
 
             {/* === HEAVY CSS ELEMENTS === */}

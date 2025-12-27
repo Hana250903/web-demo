@@ -12,8 +12,8 @@ function Navigation() {
     return (
         <header>
             <nav>
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                    <span style={{ cursor: 'pointer' }}>Demo Website</span>
+                <Link to="/">
+                    <span>Demo Website</span>
                 </Link>
                 <ul>
                     <li><Link to="/" className={isActive('/') && path === '/' ? 'active' : ''}>Trang chủ</Link></li>
