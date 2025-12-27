@@ -8,16 +8,24 @@ function HomePage() {
                 <h1>Website React Demo</h1>
                 <p>Website React - Performance Demo</p>
 
-                {/* Lỗi img-missing-alt + perf-cls-images-no-dimensions: thiếu alt, width, height */}
+                {/* LỖI LCP: Ảnh lớn 1920x1080, thiếu alt, width, height, dùng lazy sai */}
                 <img
-                    src="https://picsum.photos/800/400"
+                    src="https://picsum.photos/1920/1080"
                     className="hero-main-image"
+                    loading="lazy"
                 />
 
-                {/* Lỗi img-missing-alt + img-missing-lazy: thiếu alt và lazy */}
+                {/* LỖI: Thêm nhiều ảnh lớn để làm chậm LCP */}
                 <img
-                    src="https://picsum.photos/600/300"
+                    src="https://picsum.photos/1600/900"
                     className="hero-secondary-image"
+                    loading="lazy"
+                />
+
+                <img
+                    src="https://picsum.photos/1280/720"
+                    className="hero-third-image"
+                    loading="lazy"
                 />
 
             </section>
