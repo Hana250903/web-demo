@@ -174,7 +174,7 @@ function HomePage() {
 
             {/* 16. Heavy DOM with many elements */}
             <section className="heavy-dom">
-                {Array.from({ length: 200 }, (_, i) => (
+                {Array.from({ length: 10 }, (_, i) => (
                     <div key={i} style={{
                         padding: '10px',
                         margin: '5px',
