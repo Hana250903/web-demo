@@ -7,7 +7,7 @@ function HomePage() {
                 <h1>Chào mừng đến với trang Demo React</h1>
                 <p>Website React - Performance Demo</p>
 
-                <img src="https://picsum.photos/800/400" className="hero-main-image" alt="Hình ảnh chính của trang" loading="lazy" width="800" height="400" />
+                <img src="https://picsum.photos/800/400" className="hero-main-image" alt="Hình ảnh chính của trang" width="800" height="400" />
 
             </section>
 
