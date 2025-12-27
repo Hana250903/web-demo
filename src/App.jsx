@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 
 // Components
-import Navigation from './components/Navigation'
+const Navigation = React.lazy(() => import('./components/Navigation'))
 
 // Pages - Level 0
 const HomePage = React.lazy(() => import('./pages/HomePage'))
@@ -43,7 +43,9 @@ const BrokenPage = React.lazy(() => import('./BrokenPage'))
 function App() {
   return (
     <Router>
-      <Navigation />
+      <Suspense fallback={<div>Đang tải điều hướng...</div>}>
+        <Navigation />
+      </Suspense>
 
       <main>
         <Suspense fallback={<div>Đang tải...</div>}>
