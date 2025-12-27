@@ -8,23 +8,35 @@ function HomePage() {
                 <h1>Website React Demo</h1>
                 <p>Website React - Performance Demo</p>
 
-                {/* LỖI LCP: Ảnh lớn 1920x1080, thiếu alt, width, height, dùng lazy sai */}
+                {/* LỖI LCP: Ảnh cực lớn 4K, thiếu alt, width, height, dùng lazy sai */}
                 <img
-                    src="https://picsum.photos/1920/1080"
+                    src="https://picsum.photos/3840/2160"
                     className="hero-main-image"
                     loading="lazy"
                 />
 
                 {/* LỖI: Thêm nhiều ảnh lớn để làm chậm LCP */}
                 <img
-                    src="https://picsum.photos/1600/900"
+                    src="https://picsum.photos/2560/1440"
                     className="hero-secondary-image"
                     loading="lazy"
                 />
 
                 <img
-                    src="https://picsum.photos/1280/720"
+                    src="https://picsum.photos/1920/1080"
                     className="hero-third-image"
+                    loading="lazy"
+                />
+
+                <img
+                    src="https://picsum.photos/1600/900"
+                    className="hero-fourth-image"
+                    loading="lazy"
+                />
+
+                <img
+                    src="https://picsum.photos/1280/720"
+                    className="hero-fifth-image"
                     loading="lazy"
                 />
 
