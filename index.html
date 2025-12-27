@@ -8,17 +8,24 @@
   <meta name="description" content="Demo React App" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 
+  <!-- Fixed: Added preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fixed: Added Canonical URL -->
+  <link rel="canonical" href="https://www.example.com/" />
+
+  <!-- Fixed: Added Open Graph tags -->
+  <meta property="og:title" content="Demo React App" />
+  <meta property="og:description" content="Demo React App" />
+  <meta property="og:image" content="https://www.example.com/og-image.jpg" />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:type" content="website" />
+
   <!-- LỖI perf-external-fonts: 6 Google Fonts! -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  <!-- Fixed: Combined multiple Google Fonts into a single request -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
   <!-- LỖI: Inline CSS lớn (> 10KB) để trigger perf-inline-css -->
@@ -228,7 +235,8 @@
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <!-- Fixed: Added async attribute to the module script to prevent render-blocking -->
+  <script type="module" async src="/src/main.jsx"></script>
 </body>
 
 </html>
