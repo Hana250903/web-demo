@@ -1,4 +1,4 @@
-/* Reset và base styles */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,24 +6,18 @@
 }
 
 body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   color: #333;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
+  background: #f5f5f5;
 }
 
-/* Header - Cố định chiều cao để tránh CLS */
+/* Header - Fixed height to prevent CLS */
 header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: white;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  min-height: 70px;
-  /* Reserve space */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 60px;
 }
 
 nav {
@@ -34,233 +28,77 @@ nav {
   margin: 0 auto;
 }
 
-nav h1 {
-  font-size: 1.8rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 nav ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 nav a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
   padding: 0.5rem 1rem;
-  border-radius: 25px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
 }
 
 nav a:hover {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  transform: translateY(-2px);
+  color: #667eea;
 }
 
-nav a.active {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-}
-
-/* Main content - Reserve space để tránh CLS */
+/* Main - Fixed min-height to prevent CLS */
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  min-height: 600px;
-  /* Reserve space cho content */
+  min-height: 500px;
 }
 
-/* Hero section with depth indicators */
-.hero,
-.page-hero,
-.about-hero {
+/* Hero */
+.hero {
   text-align: center;
-  padding: 4rem 2rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 10px;
   margin-bottom: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  position: relative;
 }
 
-/* Depth badge styles */
-.depth-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: white;
-}
-
-.depth-0 .depth-badge {
-  background: #10b981;
-}
-
-.depth-1 .depth-badge {
-  background: #3b82f6;
-}
-
-.depth-2 .depth-badge {
-  background: #8b5cf6;
-}
-
-.depth-3 .depth-badge {
-  background: #f59e0b;
-}
-
-.depth-4 .depth-badge {
-  background: #ef4444;
-}
-
-/* Depth color indicators */
-.depth-0 {
-  border-left: 5px solid #10b981;
-}
-
-.depth-1 {
-  border-left: 5px solid #3b82f6;
-}
-
-.depth-2 {
-  border-left: 5px solid #8b5cf6;
-}
-
-.depth-3 {
-  border-left: 5px solid #f59e0b;
-}
-
-.depth-4 {
-  border-left: 5px solid #ef4444;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-  text-align: left;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.breadcrumb a {
-  color: #667eea;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.hero h2,
-.page-hero h2,
-.about-hero h2 {
-  font-size: 2.5rem;
+.hero h1 {
+  font-size: 2rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #667eea;
 }
 
-.hero p,
-.page-hero p,
-.about-hero p {
-  font-size: 1.2rem;
-  color: #666;
+.hero p {
   margin-bottom: 2rem;
+  color: #666;
 }
 
 .hero img {
   max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  height: auto;
+  border-radius: 10px;
 }
 
-.hero img:hover {
-  transform: scale(1.02);
-}
-
-/* Content section */
-.content,
-.about-content {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 3rem;
-  border-radius: 20px;
-  margin-bottom: 2rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
-
-article h3 {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-article p {
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-article ul {
-  margin: 1rem 0 1rem 2rem;
-  color: #555;
-}
-
-article li {
-  margin-bottom: 0.5rem;
-}
-
-article a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-article a:hover {
-  color: #764ba2;
-  text-decoration: underline;
-}
-
-/* Features section */
+/* Features */
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
 .feature-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   padding: 2rem;
-  border-radius: 15px;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  will-change: transform;
+  text-decoration: none;
+  color: inherit;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .feature-card h4 {
-  font-size: 1.4rem;
   color: #667eea;
   margin-bottom: 0.5rem;
 }
@@ -269,81 +107,27 @@ article a:hover {
   color: #666;
 }
 
-.nav-arrow {
-  display: block;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  color: #667eea;
-  transition: transform 0.3s ease;
+/* Page Hero */
+.page-hero {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
-.feature-card:hover .nav-arrow {
-  transform: translateX(5px);
+.page-hero h2 {
+  color: #667eea;
 }
 
 /* Footer */
 footer {
-  background: rgba(255, 255, 255, 0.95);
   text-align: center;
   padding: 2rem;
+  background: white;
   margin-top: 2rem;
 }
 
 footer p {
   color: #666;
-  margin-bottom: 0.5rem;
-}
-
-footer a {
-  color: #667eea;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Animations - Only use opacity to avoid CLS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* Elements không cần animation - tránh CLS */
-
-/* Responsive */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  nav ul {
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero h2,
-  .page-hero h2,
-  .about-hero h2 {
-    font-size: 1.8rem;
-  }
-
-  .content,
-  .about-content {
-    padding: 1.5rem;
-  }
-
-  .depth-badge {
-    position: static;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
 }

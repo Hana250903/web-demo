@@ -2,19 +2,15 @@ import { Link } from 'react-router-dom';
 
 function AboutPage() {
     return (
-        <main>
-            <section className="page-hero">
-                <div className="breadcrumb"><Link to="/">Trang chủ</Link> &gt; <span> Giới thiệu</span></div>
-                <h2>Về Chúng Tôi</h2>
+        <>
+            <div className="page-hero">
+                <Link to="/">← Trang chủ</Link>
+                <h2>Giới thiệu</h2>
+            </div>
+            <section>
+                <p>Thông tin về chúng tôi.</p>
             </section>
-            <section className="about-content">
-                <article>
-                    <h3>Câu chuyện</h3>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                    <p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-                </article>
-            </section>
-        </main>
+        </>
     );
 }
 
