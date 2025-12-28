@@ -5,7 +5,7 @@ function HomePage() {
         <>
             <section className="hero">
                 <h1>Chào mừng đến với trang Demo React</h1>
-                <h2>Website React Demo</h2>
+                <h1>Website React Demo</h1>
                 <p>Website React - Performance Demo</p>
 
                 <img
