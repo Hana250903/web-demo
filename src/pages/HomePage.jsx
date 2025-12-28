@@ -11,26 +11,43 @@ function HomePage() {
                 <img
                     src="https://picsum.photos/3840/2160"
                     className="hero-main-image"
+                    alt="Ảnh chính của trang demo"
+                    width="3840"
+                    height="2160"
                 />
 
                 <img
                     src="https://picsum.photos/2560/1440"
                     className="hero-secondary-image"
+                    alt="Ảnh phụ minh họa"
+                    width="2560"
+                    height="1440"
                 />
 
                 <img
                     src="https://picsum.photos/1920/1080"
                     className="hero-third-image"
+                    alt="Ảnh thứ ba minh họa"
+                    width="1920"
+                    height="1080"
                 />
 
                 <img
                     src="https://picsum.photos/1600/900"
                     className="hero-fourth-image"
+                    alt="Ảnh thứ tư minh họa"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1280/720"
                     className="hero-fifth-image"
+                    alt="Ảnh thứ năm minh họa"
+                    width="1280"
+                    height="720"
+                    loading="lazy"
                 />
 
             </section>
@@ -51,11 +68,12 @@ function HomePage() {
             </section>
 
             <section className="form-section">
-                <button className="empty-submit-btn"></button>
+                <button className="empty-submit-btn">Gửi</button>
 
-                <input type="text" id="searchInput" className="search-input-field" />
+                <label htmlFor="searchInput" className="visually-hidden">Tìm kiếm</label>
+                <input type="text" id="searchInput" className="search-input-field" placeholder="Tìm kiếm..." />
 
-                <a href="/empty-link" className="icon-link"></a>
+                <a href="/empty-link" className="icon-link">Xem chi tiết</a>
             </section>
         </>
     );
