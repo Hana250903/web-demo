@@ -8,51 +8,29 @@ function HomePage() {
                 <h2>Website React Demo</h2>
                 <p>Website React - Performance Demo</p>
 
-                {/* LỖI LCP: Ảnh cực lớn 4K, thiếu alt, width, height, dùng lazy sai */}
                 <img
                     src="https://picsum.photos/3840/2160"
                     className="hero-main-image"
-                    alt="Main hero image showing a scenic view"
-                    width="3840"
-                    height="2160"
-                    loading="eager"
                 />
 
-                {/* LỖI: Thêm nhiều ảnh lớn để làm chậm LCP */}
                 <img
                     src="https://picsum.photos/2560/1440"
                     className="hero-secondary-image"
-                    alt="Secondary hero image with a different landscape"
-                    width="2560"
-                    height="1440"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1920/1080"
                     className="hero-third-image"
-                    alt="Third hero image displaying a city skyline"
-                    width="1920"
-                    height="1080"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1600/900"
                     className="hero-fourth-image"
-                    alt="Fourth hero image with a natural scene"
-                    width="1600"
-                    height="900"
-                    loading="lazy"
                 />
 
                 <img
                     src="https://picsum.photos/1280/720"
                     className="hero-fifth-image"
-                    alt="Fifth hero image showing an abstract design"
-                    width="1280"
-                    height="720"
-                    loading="lazy"
                 />
 
             </section>
@@ -72,17 +50,12 @@ function HomePage() {
                 </Link>
             </section>
 
-            {/* Lỗi Accessibility */}
             <section className="form-section">
-                {/* a11y-missing-button-text */}
-                <button className="empty-submit-btn">Gửi</button>
+                <button className="empty-submit-btn"></button>
 
-                {/* a11y-missing-form-labels */}
-                <label htmlFor="searchInput" className="search-label">Tìm kiếm:</label>
                 <input type="text" id="searchInput" className="search-input-field" />
 
-                {/* a11y-empty-links */}
-                <a href="/empty-link" className="icon-link">Chi tiết</a>
+                <a href="/empty-link" className="icon-link"></a>
             </section>
         </>
     );
